@@ -84,7 +84,7 @@ namespace FrmPrincipal
         {
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduManufacturada.SelectedItem;
 
-            this.txtTipo.Text = seleccionada.GetType().ToString().Replace("TP3.", "");
+            this.txtTipo.Text = seleccionada.GetType().ToString().Replace("Logica.", "");
             if (seleccionada is Camiseta && ((Camiseta)seleccionada).Estampado)
             {
                 this.txtTipo.Text += " con estampado";
@@ -105,7 +105,7 @@ namespace FrmPrincipal
         {
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduDisponible.SelectedItem;
 
-            this.txtTipoDisp.Text = seleccionada.GetType().ToString().Replace("TP3.", "");
+            this.txtTipoDisp.Text = seleccionada.GetType().ToString().Replace("Logica.", "");
 
             if (seleccionada is Camiseta && ((Camiseta)seleccionada).Estampado)
             {
