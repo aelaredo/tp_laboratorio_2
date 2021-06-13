@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<ArrayOfIndumentaria xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Indumentaria xsi:type="Zapatilla">
+    <Peso>230.2767</Peso>
+    <PorcentajeAlgodon>23000</PorcentajeAlgodon>
+    <Modelo>InfinityAirForce2021</Modelo>
+    <CostoProduccion>1765454.75</CostoProduccion>
+    <Capellada>Infinity</Capellada>
+    <Suela>AirForce</Suela>
+  </Indumentaria>
+  <Indumentaria xsi:type="Zapatilla">
+    <Peso>1151.38354</Peso>
+    <PorcentajeAlgodon>46000</PorcentajeAlgodon>
+    <Modelo>ZoomReact2021</Modelo>
+    <CostoProduccion>17654548</CostoProduccion>
+    <Capellada>Zoom</Capellada>
+    <Suela>React</Suela>
+  </Indumentaria>
+  <Indumentaria xsi:type="Zapatilla">
+    <Peso>230.2767</Peso>
+    <PorcentajeAlgodon>69000</PorcentajeAlgodon>
+    <Modelo>WildHorseAirForce2021</Modelo>
+    <CostoProduccion>5296364</CostoProduccion>
+    <Capellada>WildHorse</Capellada>
+    <Suela>AirForce</Suela>
+  </Indumentaria>
+</ArrayOfIndumentaria>
