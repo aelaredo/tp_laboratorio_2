@@ -108,7 +108,6 @@ namespace Logica
         }
 
 
-
         /// <summary>
         /// Borra la tanda de produccion de la fabrica
         /// </summary>

@@ -42,10 +42,11 @@ namespace Logica
         public Zapatilla(ECapelladas capellada, ESuelas suela)
         {
             Random randomPeso = new Random();
+            // a efectos practicos simulemos numeros randoms
             double numeroRandom = Math.Round(1 + randomPeso.NextDouble() * (100 - 1), 3);
             this.Capellada = capellada;
             this.Suela = suela;
-            this.modelo = capellada.ToString() + suela.ToString() + DateTime.Today.Year.ToString();
+            this.Modelo = capellada.ToString() + suela.ToString() + DateTime.Today.Year.ToString();
             this.Peso = (float)numeroRandom * (int)this.Suela;
             this.PorcentajeAlgodon = randomPeso.Next(1, 100);
             this.CostoProduccion = this.PorcentajeAlgodon * this.Peso / 3;

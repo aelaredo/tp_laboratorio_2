@@ -534,8 +534,11 @@ namespace FrmPrincipal
             this.Controls.Add(this.lstBoxInduManufacturada);
             this.Controls.Add(this.lstBoxInduDisponible);
             this.Controls.Add(this.menuStripManufactura);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MainMenuStrip = this.menuStripManufactura;
+            this.MaximizeBox = false;
             this.Name = "FrmPrincipal";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Principal Laredo.Agustin.2C";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);

@@ -152,6 +152,12 @@ namespace Logica
 
 
         #region Sobrecarga operadores/metodos
+        /// <summary>
+        /// Las indumentarias seran iguales cuando tengan el mismo CodigoUnico o cuando tengan el mismo nombre de Modelo
+        /// </summary>
+        /// <param name="ropaUno">Ropa a ser comparada</param>
+        /// <param name="ropaDos">Ropa a ser comparada</param>
+        /// <returns>TRUE=Si ambas NO tienen el mismo codigo unico o nombre de modelo FALSE=Cuando ambas indumentarias tengan el mismo CodigoUnico o nombre de modelo</returns>
         public static bool operator ==(Indumentaria ropaUno, Indumentaria ropaDos)
         {
             if (ropaUno is null || ropaDos is null)
@@ -171,6 +177,10 @@ namespace Logica
             return !(ropaUno == ropaDos);
         }
 
+        /// <summary>
+        /// La sobrecarga de ToString la usaremos para mostrar la informacion en nuestro UI
+        /// </summary>
+        /// <returns>"El tipo de indumentaria" - "el nombre del modelo")</returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();

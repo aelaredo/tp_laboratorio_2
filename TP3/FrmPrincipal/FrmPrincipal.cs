@@ -32,17 +32,16 @@ namespace FrmPrincipal
 
             string[] files = Directory.GetFiles((Environment.GetFolderPath(Environment.SpecialFolder.Desktop)), "IndumentariaDisponible?????????????????.xml");
 
-            if (files.Length == 0)
+            /// si se encontro alguna lista de indumentaria disponible, se leera la primera de la lista
+            if (files.Length > 0)
             {
-                this.lstBoxInduManufacturada.DataSource = Fabrica.ListaIndumentariaProduccion<Indumentaria>();
-            }
-            else
-            {
+                //aca tambien se podria llenar la lista de manufactura con otro archivo
                 DocumentosFabrica.LeerDocumento(files[files.Length - 1], out Fabrica.indumentariaDisponible);
-                this.lstBoxInduDisponible.DataSource = Fabrica.ListaIndumentariaDisponible<Indumentaria>();
-                this.lstBoxInduManufacturada.DataSource = Fabrica.ListaIndumentariaProduccion<Indumentaria>();
             }
-            
+            //llenamos los lisboxes, con listas de tipo Indumentaria
+            this.lstBoxInduDisponible.DataSource = Fabrica.ListaIndumentariaDisponible<Indumentaria>();
+            this.lstBoxInduManufacturada.DataSource = Fabrica.ListaIndumentariaProduccion<Indumentaria>();
+
         }
         /// <summary>
         /// Si en este metodo el path es incorrecto y falla el guardado de la lista disponible por esto, el metodo DocumentosFabrica.GuardarDocumento generara una excepcion  que sera catcheada y mostrada, junto con la informacion del path que se genero en esta misma funcion
@@ -66,6 +65,12 @@ namespace FrmPrincipal
 
         }
 
+
+        /// <summary>
+        /// cada vez que se pinta el form se calcula el costo de la lista de produccion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FrmPrincipal_Paint(object sender, PaintEventArgs e)
         {
             float costoTanda = 0;
@@ -80,6 +85,11 @@ namespace FrmPrincipal
 
 
         #region Eventos listBoxes
+        /// <summary>
+        /// Cuando se selecciona un item en el list box de indumentaria manufacturada se nos muestra el detalle en sus respectivos casilleros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstBoxInduManufacturada_SelectedValueChanged(object sender, EventArgs e)
         {
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduManufacturada.SelectedItem;
@@ -101,6 +111,11 @@ namespace FrmPrincipal
             this.numCantFabricada.Value = seleccionada.CantidadManufacturada;
         }
 
+        /// <summary>
+        /// Cuando se selecciona un item en el list box de indumentaria disponible se nos muestra el detalle en sus respectivos casilleros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstBoxInduDisponible_SelectedValueChanged(object sender, EventArgs e)
         {
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduDisponible.SelectedItem;
@@ -128,23 +143,28 @@ namespace FrmPrincipal
         #region Eventos Botones
         private void btnAgregarAManufactura_Click(object sender, EventArgs e)
         {
-
+            //Primero chequeamos que halla articulos disponibles para pasar a manufactura
             if (this.lstBoxInduDisponible.Items.Count == 0)
             {
                 MessageBox.Show("No hay indumentarias disponibles para ser manufacturadas");
                 return;
             }
 
+
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduDisponible.SelectedItem;
 
             try
             {
+                //Una vez que casteamos el item seleccionado hacemos uso del metodo su interface
                 seleccionada.Fabricar();
+                //Luego de que se agregue a la lista de manufactura es necesario que actualicemos la lista para que muestre este nuevo item que acabamos de agregar
                 this.lstBoxInduManufacturada.DataSource = Fabrica.ListaIndumentariaProduccion<Indumentaria>();
+                //Luego lo seleccionamos para que se vea que se agrego
                 this.lstBoxInduManufacturada.SelectedItem = seleccionada;
             }
             catch (Exception error)
             {
+                //Catcheamos cualquier excepcion que se pueda dar al momento de agregar la indumentaria a la lista de produccion
                 MessageBox.Show(error.Message + error.InnerException.Message);
             }
             
@@ -183,30 +203,27 @@ namespace FrmPrincipal
             }
 
             Indumentaria seleccionada = (Indumentaria)this.lstBoxInduManufacturada.SelectedItem;
-
+            //Si es el caso de que hay mas de una indumentaria, simplemente que se reste una unidad
             if (seleccionada.CantidadManufacturada > 1)
             {
                 seleccionada.CantidadManufacturada--;
             }
             else
             {
+                //Si no borramos directamente ese objeto
                 Fabrica.indumentariaProduccion.Remove(seleccionada);
             }
 
             this.lstBoxInduManufacturada.DataSource = Fabrica.ListaIndumentariaProduccion<Indumentaria>();
 
+            //Si es el caso de que no quede ninguna indumentaria en el listbox, que se limpien los casilleros de los detalles
             if (this.lstBoxInduManufacturada.Items.Count == 0)
             {
                 this.limpiarCasillerosInduManufacturada();
             }
 
         }
-        private void btnAgregarNuevaIndu_Click(object sender, EventArgs e)
-        {
-            FrmCrearIndumentaria ventanaCrearIndumentaria = new FrmCrearIndumentaria();
-            ventanaCrearIndumentaria.ShowDialog();
-            this.lstBoxInduDisponible.DataSource = Fabrica.ListaIndumentariaDisponible<Indumentaria >();
-        }
+
         private void btnBorrarDisp_Click(object sender, EventArgs e)
         {
             if (this.lstBoxInduDisponible.Items.Count == 0)
@@ -230,6 +247,15 @@ namespace FrmPrincipal
                 this.limpiarCasillerosInduDisponible();
             }
         }
+
+        private void btnAgregarNuevaIndu_Click(object sender, EventArgs e)
+        {
+            FrmCrearIndumentaria ventanaCrearIndumentaria = new FrmCrearIndumentaria();
+            ventanaCrearIndumentaria.ShowDialog();
+            //Al volver del cuadro que nos permitio agregar una indumentaria a la lista de disponibles, actualizamos el source de la listbox
+            this.lstBoxInduDisponible.DataSource = Fabrica.ListaIndumentariaDisponible<Indumentaria >();
+        }
+       
         #endregion
 
         #region Eventos ToolStrip
@@ -241,6 +267,7 @@ namespace FrmPrincipal
                 return;
             }
 
+            //Se decidio crear estas variables para que las llamadas a las funciones se pueda cambiar en algun momento, pero que mantenga el formato
             string nombreArchivo = "\\FabricaProduccionCamisetas " + DateTime.Now.ToString("dd-MM-yyyy HHmmss") + ".xml";
 
             string pathArchivo = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + nombreArchivo;
@@ -332,7 +359,6 @@ namespace FrmPrincipal
             }
         }
         #endregion
-
 
         #region Funciones de Limpieza
         /// <summary>

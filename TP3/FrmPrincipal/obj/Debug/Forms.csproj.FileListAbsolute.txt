@@ -26,3 +26,17 @@ C:\Users\Agust\Documents\TPFINAL\TP3\FrmPrincipal\obj\Debug\Forms.csproj.CoreCom
 C:\Users\Agust\Documents\TPFINAL\TP3\FrmPrincipal\obj\Debug\Forms.csproj.CopyComplete
 C:\Users\Agust\Documents\TPFINAL\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.exe
 C:\Users\Agust\Documents\TPFINAL\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.pdb
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.exe.config
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.exe
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.pdb
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\bin\Debug\TP3.dll
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\bin\Debug\TP3.pdb
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\Forms.csproj.AssemblyReference.cache
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.FrmCrearIndumentaria.resources
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.FrmPrincipal.resources
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.Properties.Resources.resources
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\Forms.csproj.GenerateResource.cache
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\Forms.csproj.CoreCompileInputs.cache
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\Forms.csproj.CopyComplete
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.exe
+C:\Users\Agust\Desktop\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.pdb

@@ -204,7 +204,9 @@ namespace FrmPrincipal
             this.Controls.Add(this.lblCapellada);
             this.Controls.Add(this.lblSuela);
             this.Controls.Add(this.grpTipoIndu);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "FrmCrearIndumentaria";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Crear Indumentaria Laredo.Agustin.2C";
             this.Load += new System.EventHandler(this.FrmCrearIndumentaria_Load);
             this.grpTipoIndu.ResumeLayout(false);

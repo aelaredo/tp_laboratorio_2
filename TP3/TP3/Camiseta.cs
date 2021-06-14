@@ -30,6 +30,10 @@ namespace Logica
             this.costoProduccion = (this.PorcentajeAlgodon + 100) * 10;
         }
 
+        /// <summary>
+        /// La sobre carga de ToString 
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             StringBuilder sb = new StringBuilder();
