@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using IndumentariasExceptions;
+using IndumentariasExceptiones;
 
-namespace Logica
+namespace Logica.Objetos
 {
 
     #region Enumerados
@@ -14,14 +14,14 @@ namespace Logica
         React = 5,
         Shox = 3,
         Metcon = 2,
-        AirForce = 1,
+        Airforce = 1,
         Pegasus = 4
     }
 
     public enum ECapelladas
     {
         Zoom = 2,
-        WildHorse = 3,
+        Wildhorse = 3,
         Infinity = 1,
         Revolution = 5,
         Waffle = 4
@@ -50,6 +50,15 @@ namespace Logica
             this.Peso = (float)numeroRandom * (int)this.Suela;
             this.PorcentajeAlgodon = randomPeso.Next(1, 100);
             this.CostoProduccion = this.PorcentajeAlgodon * this.Peso / 3;
+        }
+
+        public Zapatilla(ECapelladas capellada, ESuelas suela, string anioProduccion):this(capellada, suela)
+        {
+            this.Modelo = capellada.ToString() + suela.ToString() + anioProduccion;
+        }
+        public Zapatilla(ECapelladas capellada, ESuelas suela, string anioProduccion, string codigoPrueba) : this(capellada, suela, anioProduccion)
+        {
+            this.CodigoUnico = codigoPrueba;
         }
 
         public ECapelladas Capellada

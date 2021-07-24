@@ -43,6 +43,7 @@ namespace FrmPrincipal
             this.btnNuevaIndumentaria = new System.Windows.Forms.Button();
             this.cmbSuela = new System.Windows.Forms.ComboBox();
             this.cmbCapellada = new System.Windows.Forms.ComboBox();
+            this.pbCreacion = new System.Windows.Forms.ProgressBar();
             this.grpTipoIndu.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPorcent)).BeginInit();
             this.SuspendLayout();
@@ -187,11 +188,19 @@ namespace FrmPrincipal
             this.cmbCapellada.Size = new System.Drawing.Size(85, 21);
             this.cmbCapellada.TabIndex = 16;
             // 
+            // pbCreacion
+            // 
+            this.pbCreacion.Location = new System.Drawing.Point(15, 92);
+            this.pbCreacion.Name = "pbCreacion";
+            this.pbCreacion.Size = new System.Drawing.Size(484, 23);
+            this.pbCreacion.TabIndex = 18;
+            // 
             // FrmCrearIndumentaria
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 96);
+            this.ClientSize = new System.Drawing.Size(511, 122);
+            this.Controls.Add(this.pbCreacion);
             this.Controls.Add(this.cmbCapellada);
             this.Controls.Add(this.cmbSuela);
             this.Controls.Add(this.btnNuevaIndumentaria);
@@ -233,5 +242,6 @@ namespace FrmPrincipal
         private System.Windows.Forms.Button btnNuevaIndumentaria;
         private System.Windows.Forms.ComboBox cmbSuela;
         private System.Windows.Forms.ComboBox cmbCapellada;
+        private System.Windows.Forms.ProgressBar pbCreacion;
     }
 }

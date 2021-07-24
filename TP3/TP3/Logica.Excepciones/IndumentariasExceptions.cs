@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IndumentariasExceptions
+namespace IndumentariasExceptiones
 {
     public class IndumentariasExceptionsRepetida : Exception
     { 
@@ -57,7 +57,19 @@ namespace IndumentariasExceptions
 
     public class IndumentariasExceptionsErrorAlGenerarArchivo : Exception
     {
+        public IndumentariasExceptionsErrorAlGenerarArchivo(string mensaje) : base(mensaje)
+        {
+
+        }
         public IndumentariasExceptionsErrorAlGenerarArchivo(string mensaje, Exception e) : base(mensaje, e)
+        {
+
+        }
+    }
+
+    public class IndumentariasExceptionsErrorAlFabricar : Exception
+    {
+        public IndumentariasExceptionsErrorAlFabricar(string mensaje, Exception e) : base(mensaje, e)
         {
 
         }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Logica
+namespace Logica.Objetos
 {
     public class Camiseta : Indumentaria
     {
@@ -18,10 +18,11 @@ namespace Logica
 
         public Camiseta()
         {
-
         }
 
-        public Camiseta(float porcentajeAlgodon, bool estampado, string modelo): base()
+        
+
+        public Camiseta(float porcentajeAlgodon, bool estampado, string modelo): this()
         {
             this.porcentajeAlgodon = porcentajeAlgodon;
             this.estampado = estampado;
@@ -29,6 +30,12 @@ namespace Logica
             this.peso = 25.50f;
             this.costoProduccion = (this.PorcentajeAlgodon + 100) * 10;
         }
+
+        public Camiseta(float porcentajeAlgodon, bool estampado, string modelo, string codigoPrueba) : this(porcentajeAlgodon, estampado, modelo)
+        {
+            this.CodigoUnico = codigoPrueba;
+        }
+
 
         /// <summary>
         /// La sobre carga de ToString 

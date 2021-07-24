@@ -4,10 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
-using IndumentariasExceptions;
+using IndumentariasExceptiones;
+using Logica.Listas;
+using Logica.BaseDeDatos;
+using Logica.Interfaces;
 
-namespace Logica
+
+namespace Logica.Objetos
 {
+    public delegate void IndumentariaFabricarEventHandler(object source, EventArgs args);
+   
+
     [XmlInclude(typeof(Zapatilla))]
     [XmlInclude(typeof(Camiseta))]
     public abstract class Indumentaria : IFabricable<Indumentaria>
@@ -19,11 +26,21 @@ namespace Logica
         protected float costoProduccion;
         protected int cantidadManufacturada = 0;
         protected int cantidadStock = 0;
-
+        
+        public event EventHandler<IndumentariaEventArgs> FabricandoIndumentaria;
 
         protected Indumentaria()
         {
-            this.codigoUnico = Guid.NewGuid().ToString().Substring(10);
+            this.codigoUnico = Guid.NewGuid().SimplificarCodigoUnico();
+            FabricandoIndumentaria += AltaBajaConsultaListas.AgregarIndumentariaProduccion;
+            FabricandoIndumentaria += LeerGuardarBaseDatos.GuardarFabricadoEnDB;
+        }
+
+        protected Indumentaria(string codigoUnico)
+        {
+            this.codigoUnico = codigoUnico;
+            FabricandoIndumentaria += AltaBajaConsultaListas.AgregarIndumentariaProduccion;
+            FabricandoIndumentaria += LeerGuardarBaseDatos.GuardarFabricadoEnDB;
         }
 
         #region Metodos y propiedades IFabricable
@@ -63,14 +80,20 @@ namespace Logica
             }
         }
 
+        /// <summary>
+        /// Llama a evento FabricandoIndumentaria, actualmente suscrito a Fabrica.AgregarListBoxProduccion y Fabrica.GuardarFabricadoEnDB, llama a Fabrica.IndumentariaYaEnProduccion(this) para primer parametro de this.FabricandoIndumentaria
+        /// </summary>                                                    
         public void Fabricar()
         {
             try
             {
-                Fabrica.agregarAProduccion(this);
-                this.cantidadManufacturada++;
+                //// le aviso a mi evento si ya esta disponible para que se agregue una unidad a CantidadManufactuirada, si es false que lo agregue
+                if (!(this.FabricandoIndumentaria is null)){
+                    this.FabricandoIndumentaria(AltaBajaConsultaListas.IndumentariaEnBDProduccion(this), new IndumentariaEventArgs(this));
+                }
+                
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 throw new IndumentariasExceptionsIndumentariaNoInstanciada(" No se pudo fabricar la indumentaria" + e.Message, e);
             }
@@ -79,14 +102,12 @@ namespace Logica
         }
         #endregion
 
-
         #region Propiedades Indumentaria
         public string CodigoUnico
         {
             get { return this.codigoUnico.ToString(); }
-            set { }
+            set { this.codigoUnico = value; }
         }
-
 
         protected virtual float PrecioConImpuestos
         {
@@ -105,7 +126,7 @@ namespace Logica
 
         public float Peso
         {
-            get { return this.peso; }
+            get { return (float)Math.Round(this.peso, 3); }
             set 
             { 
                 if (value != 0)
@@ -150,7 +171,6 @@ namespace Logica
         }
         #endregion
 
-
         #region Sobrecarga operadores/metodos
         /// <summary>
         /// Las indumentarias seran iguales cuando tengan el mismo CodigoUnico o cuando tengan el mismo nombre de Modelo
@@ -164,8 +184,7 @@ namespace Logica
             {
                 return false;
             }
-
-            if (ropaUno.CodigoUnico == ropaDos.CodigoUnico || ropaUno.Modelo == ropaDos.Modelo)
+            if (ropaUno.Modelo == ropaDos.Modelo)
             {
                 return true;
             }
@@ -185,7 +204,7 @@ namespace Logica
         {
             StringBuilder sb = new StringBuilder();
             
-            sb.Append(this.GetType().ToString().Replace("Logica.", "")+ " - ");
+            sb.Append(this.GetType().ToString().Replace("Logica.Objetos.", "")+ " - ");
             sb.Append(this.Modelo +" ");
             //sb.Append("Peso: "+this.Peso.ToString() + ", ");
             //sb.Append("Porcentaje Algodon: " + this.PorcentajeAlgodon.ToString() + ", ");
@@ -193,7 +212,6 @@ namespace Logica
             return sb.ToString();
         }
         #endregion
-
 
     }
 }

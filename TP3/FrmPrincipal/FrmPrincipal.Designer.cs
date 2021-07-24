@@ -69,9 +69,11 @@ namespace FrmPrincipal
             this.documentosModelosDisponiblesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentosDisponiblesSoloCAMISETASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarIndumentariaDisponibleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.documentosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarDocManufacturaSoloCAMISTESToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lblModelo = new System.Windows.Forms.Label();
             this.lblTipo = new System.Windows.Forms.Label();
             this.txtModelo = new System.Windows.Forms.TextBox();
@@ -206,7 +208,7 @@ namespace FrmPrincipal
             // 
             // btnAgregarNuevaIndu
             // 
-            this.btnAgregarNuevaIndu.Location = new System.Drawing.Point(321, 466);
+            this.btnAgregarNuevaIndu.Location = new System.Drawing.Point(321, 458);
             this.btnAgregarNuevaIndu.Name = "btnAgregarNuevaIndu";
             this.btnAgregarNuevaIndu.Size = new System.Drawing.Size(122, 54);
             this.btnAgregarNuevaIndu.TabIndex = 14;
@@ -216,7 +218,7 @@ namespace FrmPrincipal
             // 
             // btnAgregarAManufactura
             // 
-            this.btnAgregarAManufactura.Location = new System.Drawing.Point(481, 468);
+            this.btnAgregarAManufactura.Location = new System.Drawing.Point(481, 460);
             this.btnAgregarAManufactura.Name = "btnAgregarAManufactura";
             this.btnAgregarAManufactura.Size = new System.Drawing.Size(121, 50);
             this.btnAgregarAManufactura.TabIndex = 15;
@@ -226,7 +228,7 @@ namespace FrmPrincipal
             // 
             // btnGenerarDocumento
             // 
-            this.btnGenerarDocumento.Location = new System.Drawing.Point(749, 468);
+            this.btnGenerarDocumento.Location = new System.Drawing.Point(749, 460);
             this.btnGenerarDocumento.Name = "btnGenerarDocumento";
             this.btnGenerarDocumento.Size = new System.Drawing.Size(107, 52);
             this.btnGenerarDocumento.TabIndex = 16;
@@ -324,6 +326,7 @@ namespace FrmPrincipal
             // 
             // numCantFabricada
             // 
+            this.numCantFabricada.Enabled = false;
             this.numCantFabricada.Location = new System.Drawing.Point(965, 213);
             this.numCantFabricada.Name = "numCantFabricada";
             this.numCantFabricada.Size = new System.Drawing.Size(120, 20);
@@ -409,7 +412,8 @@ namespace FrmPrincipal
             // 
             this.documentosModelosDisponiblesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.documentosDisponiblesSoloCAMISETASToolStripMenuItem,
-            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem});
+            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem,
+            this.exportarIndumentariaDisponibleToolStripMenuItem});
             this.documentosModelosDisponiblesToolStripMenuItem.Name = "documentosModelosDisponiblesToolStripMenuItem";
             this.documentosModelosDisponiblesToolStripMenuItem.Size = new System.Drawing.Size(200, 20);
             this.documentosModelosDisponiblesToolStripMenuItem.Text = "Documentos Modelos Disponibles";
@@ -417,22 +421,30 @@ namespace FrmPrincipal
             // documentosDisponiblesSoloCAMISETASToolStripMenuItem
             // 
             this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Name = "documentosDisponiblesSoloCAMISETASToolStripMenuItem";
-            this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
-            this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Text = "Generar Doc. Disponible solo CAMISETAS";
+            this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Text = "Exportar XML Camisetas Disponibles";
             this.documentosDisponiblesSoloCAMISETASToolStripMenuItem.Click += new System.EventHandler(this.documentosDisponiblesSoloCAMISETASToolStripMenuItem_Click);
             // 
             // documentosDisponiblesSoloZAPATILLASToolStripMenuItem
             // 
             this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Name = "documentosDisponiblesSoloZAPATILLASToolStripMenuItem";
-            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Size = new System.Drawing.Size(292, 22);
-            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Text = "Generar Doc. Disponible solo ZAPATILLAS";
+            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Text = "Exportar XML Zapatillas Disponibles";
             this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem.Click += new System.EventHandler(this.documentosDisponiblesSoloZAPATILLASToolStripMenuItem_Click);
+            // 
+            // exportarIndumentariaDisponibleToolStripMenuItem
+            // 
+            this.exportarIndumentariaDisponibleToolStripMenuItem.Name = "exportarIndumentariaDisponibleToolStripMenuItem";
+            this.exportarIndumentariaDisponibleToolStripMenuItem.Size = new System.Drawing.Size(283, 22);
+            this.exportarIndumentariaDisponibleToolStripMenuItem.Text = "Exportar XML Indumentarias Disponible";
+            this.exportarIndumentariaDisponibleToolStripMenuItem.Click += new System.EventHandler(this.exportarIndumentariaDisponibleToolStripMenuItem_Click);
             // 
             // documentosToolStripMenuItem
             // 
             this.documentosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.generarDocManufacturaSoloCAMISTESToolStripMenuItem,
-            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem});
+            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem,
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem});
             this.documentosToolStripMenuItem.Name = "documentosToolStripMenuItem";
             this.documentosToolStripMenuItem.Size = new System.Drawing.Size(158, 20);
             this.documentosToolStripMenuItem.Text = "Documentos Manufactura";
@@ -440,16 +452,23 @@ namespace FrmPrincipal
             // generarDocManufacturaSoloCAMISTESToolStripMenuItem
             // 
             this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Name = "generarDocManufacturaSoloCAMISTESToolStripMenuItem";
-            this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
-            this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Text = "Generar Doc. manufactura solo CAMISETAS";
+            this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Text = "Exportar XML Manufactura solo CAMISETAS";
             this.generarDocManufacturaSoloCAMISTESToolStripMenuItem.Click += new System.EventHandler(this.generarDocumentoDeManufacturaSoloCAMISTESToolStripMenuItem_Click);
             // 
             // generarDocManufacturaSoloZAPATILLASToolStripMenuItem
             // 
             this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Name = "generarDocManufacturaSoloZAPATILLASToolStripMenuItem";
-            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Size = new System.Drawing.Size(304, 22);
-            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Text = "Generar Doc. manufactura solo ZAPATILLAS";
+            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Text = "Exportar XML Manufactura solo ZAPATILLAS";
             this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem.Click += new System.EventHandler(this.generarDocManufacturaSoloZAPATILLASToolStripMenuItem_Click);
+            // 
+            // exportarXMLManufacturaIndumentariaToolStripMenuItem
+            // 
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem.Name = "exportarXMLManufacturaIndumentariaToolStripMenuItem";
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem.Size = new System.Drawing.Size(307, 22);
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem.Text = "Exportar XML Manufactura Indumentaria";
+            this.exportarXMLManufacturaIndumentariaToolStripMenuItem.Click += new System.EventHandler(this.exportarXMLManufacturaIndumentariaToolStripMenuItem_Click);
             // 
             // lblModelo
             // 
@@ -487,13 +506,13 @@ namespace FrmPrincipal
             // 
             // indumentariaBindingSource
             // 
-            this.indumentariaBindingSource.DataSource = typeof(Logica.Indumentaria);
+            this.indumentariaBindingSource.DataSource = typeof(Logica.Objetos.Indumentaria);
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1129, 525);
+            this.ClientSize = new System.Drawing.Size(1129, 523);
             this.Controls.Add(this.btnBorrarDisp);
             this.Controls.Add(this.txtTipo);
             this.Controls.Add(this.txtModeloDisp);
@@ -554,8 +573,6 @@ namespace FrmPrincipal
 
         #endregion
         private System.Windows.Forms.BindingSource indumentariaBindingSource;
-        private System.Windows.Forms.ListBox lstBoxInduDisponible;
-        private System.Windows.Forms.ListBox lstBoxInduManufacturada;
         private System.Windows.Forms.Label lblInduDisponible;
         private System.Windows.Forms.Label lblInduProduccion;
         private System.Windows.Forms.Label lblCodigo;
@@ -600,6 +617,10 @@ namespace FrmPrincipal
         private System.Windows.Forms.ToolStripMenuItem documentosModelosDisponiblesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentosDisponiblesSoloZAPATILLASToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem documentosDisponiblesSoloCAMISETASToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarIndumentariaDisponibleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportarXMLManufacturaIndumentariaToolStripMenuItem;
+        public System.Windows.Forms.ListBox lstBoxInduDisponible;
+        public System.Windows.Forms.ListBox lstBoxInduManufacturada;
     }
 }
 

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Logica.Objetos;
 
-namespace Logica
+namespace Logica.Interfaces
 {
     public interface IFabricable<T> where T : Indumentaria
     {
