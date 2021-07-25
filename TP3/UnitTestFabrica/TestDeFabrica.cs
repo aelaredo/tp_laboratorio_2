@@ -17,7 +17,8 @@ namespace UnitTestFabrica
     [TestClass]
     public class TestDeFabrica
     {
-        //(Capelladas capellada, Suelas suela, float costoProduccion)
+        #region Zapatillas Camisetas 
+
         public Zapatilla indumentariaBienZapa1;
         public Zapatilla indumentariaBienZapa2;
         public Zapatilla indumentariaBienZapa3;
@@ -30,6 +31,7 @@ namespace UnitTestFabrica
         public Indumentaria indumentariaMismoObjeto;
         public Indumentaria indumentariaNull;
 
+        #endregion
 
         [TestInitialize]
         public void Initialize()
@@ -47,8 +49,8 @@ namespace UnitTestFabrica
             this.indumentariaNull = null;
         }
 
-       
 
+        #region Testeos XML
         /// <summary>
         /// Agrega cuatro indumentaria y lo guarda en Escritorio como TestDisponibleGuardado, luego lo lee
         /// </summary>
@@ -106,6 +108,10 @@ namespace UnitTestFabrica
 
         }
 
+        #endregion
+
+        #region Testeos Listas
+
         /// <summary>
         /// Agrega 4 zapatillas y 4 camisetas a lista interna de Disponibles mediante Fabrica.AgregarIndumentariaDisponible y se filtran mediante Fabrica.ListaIndumentariaDisponible<T>
         /// </summary>
@@ -147,6 +153,8 @@ namespace UnitTestFabrica
             Assert.IsTrue(AltaBajaConsultaListas.ListaIndumentariaProduccion<Indumentaria>().Count == 4);
             AltaBajaConsultaListas.indumentariaProduccion.Clear();
         }
+
+        #endregion
 
         #region Pruebas base de datos
 
@@ -338,9 +346,7 @@ namespace UnitTestFabrica
 
         #endregion
 
-        //public void LeerBaseDatosManufacturados
-
-
+        #region Funciones Auxiliares
         /// <summary>
         /// Agrega a la lista indicada 2 sumando y agregando a lista de produccion/disponibles y el tipo que pase por parametro
         /// </summary>
@@ -400,5 +406,6 @@ namespace UnitTestFabrica
             }
         }
 
+        #endregion
     }
 }
