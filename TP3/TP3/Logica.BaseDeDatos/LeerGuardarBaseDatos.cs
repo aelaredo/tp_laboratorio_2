@@ -29,6 +29,7 @@ namespace Logica.BaseDeDatos
                     
         }
 
+        #region Guardado en base de datos
         /// <summary>
         /// Agrega o updatea  el objeto pasado por segundo parametro como new IndumentariaEventArgs(indumentaria) a la tabla Manufacturados
         /// </summary>
@@ -122,10 +123,6 @@ namespace Logica.BaseDeDatos
                     LeerGuardarBaseDatos.comando.Parameters.AddWithValue("@costo", (decimal)indumentariaAgregar.CostoProduccion);
 
                     LeerGuardarBaseDatos.comando.ExecuteNonQuery();
-                    LeerGuardarBaseDatos.conexion.Close();
-
-
-
                 }
                 catch (Exception e)
                 {
@@ -138,10 +135,9 @@ namespace Logica.BaseDeDatos
             }
 
         }
+        #endregion
 
-
-
-
+        #region Borrado de base de datos
         public static void BorrarIndumentariaDisponibleBaseDato(Indumentaria indumentariaBorrar)
         {
             try
@@ -178,15 +174,22 @@ namespace Logica.BaseDeDatos
            
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="indumentariaBorrar"></param>
         public static void BorrarIndumentariaManufacturadaBaseDatos(Indumentaria indumentariaBorrar)
         {
             try
             {
+                //primero debo consultar a mi base de datos de manufacturados
                 Dictionary<string, int> manufacturadosDB = new Dictionary<string, int>();
                 LeerGuardarBaseDatos.LeerBaseDatosManufacturados(out manufacturadosDB);
-                int cantidadFabricados = manufacturadosDB[indumentariaBorrar.Modelo];
-                //manufacturadosDB.TryGetValue(indumentariaBorrar.Modelo, out cantidadFabricados);
 
+                //Ahora tenemso un diccionario con llave siendo el modelos y con la cantidad de fabricados que tiene nuestro modelo
+                int cantidadFabricados = manufacturadosDB[indumentariaBorrar.Modelo];
+                
+                //Abrimos nuestra conexion
                 LeerGuardarBaseDatos.conexion = new SqlConnection("Data Source=.; Initial Catalog=Modelos; Integrated Security=True");
                 LeerGuardarBaseDatos.comando = new SqlCommand();
                 LeerGuardarBaseDatos.comando.Connection = LeerGuardarBaseDatos.conexion;
@@ -195,26 +198,24 @@ namespace Logica.BaseDeDatos
                 {
                     LeerGuardarBaseDatos.conexion.Open();
                 }
-               
+
+                //limpio mis parametros
                 LeerGuardarBaseDatos.comando.Parameters.Clear();
-                //typeof(Indumentaria);
+
+                //Si nuestra indumentaria ya está en nuestra base de datos, osea que tiene mas de una cantidad, solamente le restare uno a esta cantidad
                 if (manufacturadosDB.ContainsKey(indumentariaBorrar.Modelo) && cantidadFabricados > 1)
                 {
                     LeerGuardarBaseDatos.comando.CommandText = "UPDATE Manufacturados SET cantidadFabricada = @cantFab WHERE nombreModelo = @nombreMod";
                     
                     LeerGuardarBaseDatos.comando.Parameters.AddWithValue("@cantFab", cantidadFabricados-1);
                 }
-                else
+                else//si nuestra cantidad es 1, debemos borarla
                 {
                     LeerGuardarBaseDatos.comando.CommandText = "DELETE FROM Manufacturados WHERE nombreModelo = @nombreMod";
                 }
                 
                 LeerGuardarBaseDatos.comando.Parameters.AddWithValue("@nombreMod", indumentariaBorrar.Modelo);
-                
-
                 LeerGuardarBaseDatos.comando.ExecuteNonQuery();
-
-
             }
             catch (Exception e)
             {
@@ -282,8 +283,10 @@ namespace Logica.BaseDeDatos
                 LeerGuardarBaseDatos.conexion.Close();
             }
         }
-    
 
+        #endregion
+
+        #region Lectura de base de datos
         /// <summary>
         /// Lee la base de datos de indumentaria disponible y la devuelve en una lista de Indumentaria
         /// </summary>
@@ -315,19 +318,11 @@ namespace Logica.BaseDeDatos
                     string columnaPeso = oDrIndumentariaLeida["peso"].ToString();
                     string columnaPorcentajeAlgodon = oDrIndumentariaLeida["porcentajeAlgodon"].ToString();
                     string columnaCostoProduccion = oDrIndumentariaLeida["costoProduccion"].ToString();
+
                      //Esta variable la guarde como 0 siendo false y 1 siendo true
                     bool columnaEstampado = ((int)oDrIndumentariaLeida["estampado"] == 1);
 
                     indumentariaAgregar = new Camiseta(float.Parse(columnaPorcentajeAlgodon), columnaEstampado, columnaNombreModelo);
-
-                     //if (((int)oDrIndumentariaLeida["estampado"] == 1))
-                     //{
-                     //indumentariaAgregar = new Camiseta(float.Parse(columnaPorcentajeAlgodon), true, columnaNombreModelo);
-                     //}
-                     //else if (((int)oDrIndumentariaLeida["estampado"] == 0))
-                     //{
-                     //indumentariaAgregar = new Camiseta(float.Parse(columnaPorcentajeAlgodon), true, columnaNombreModelo);
-                     //}
 
                      if (!(indumentariaAgregar.Equals(null)))
                      {
@@ -339,8 +334,9 @@ namespace Logica.BaseDeDatos
                      }
 
                }
-               LeerGuardarBaseDatos.conexion.Close();
                ////Debo cerrar y abrir de nuevo la conexion para hcer un nuevo query
+               LeerGuardarBaseDatos.conexion.Close();
+               
                LeerGuardarBaseDatos.comando.Connection = LeerGuardarBaseDatos.conexion;
                if (LeerGuardarBaseDatos.conexion.State != System.Data.ConnectionState.Open && LeerGuardarBaseDatos.conexion.State != System.Data.ConnectionState.Connecting)
                {
@@ -402,16 +398,16 @@ namespace Logica.BaseDeDatos
 
                 LeerGuardarBaseDatos.comando.CommandText = "SELECT * FROM Manufacturados";
 
-                SqlDataReader oDrCami = LeerGuardarBaseDatos.comando.ExecuteReader();
+                SqlDataReader oDrIndumentariaManufacturada = LeerGuardarBaseDatos.comando.ExecuteReader();
 
-                while (oDrCami.Read())
+                while (oDrIndumentariaManufacturada.Read())
                 {
                     //Por cada registro voy a recuperar la columna del nombre de modelo
-                    string columnaNombreModelo = oDrCami["nombreModelo"].ToString();
+                    string columnaNombreModelo = oDrIndumentariaManufacturada["nombreModelo"].ToString();
                     //Y tambien la cantidad fabricada
                     int columnaCantidadFabricada;
                     //Para esto hago un TryParse y en el mismo if verifico que se recupero bien el nombre del modelo
-                    if(int.TryParse(oDrCami["cantidadFabricada"].ToString(), out columnaCantidadFabricada) && !(String.IsNullOrEmpty(columnaNombreModelo)))
+                    if(int.TryParse(oDrIndumentariaManufacturada["cantidadFabricada"].ToString(), out columnaCantidadFabricada) && !(String.IsNullOrEmpty(columnaNombreModelo)))
                     {
                         //agrego a este diccionario este par de datos
                         diccionarioIndumentariaCantFabricada.Add(columnaNombreModelo, columnaCantidadFabricada);
@@ -428,9 +424,7 @@ namespace Logica.BaseDeDatos
                 LeerGuardarBaseDatos.conexion.Close();
             }
         }
-
-
-       
+        #endregion
 
     }
 }

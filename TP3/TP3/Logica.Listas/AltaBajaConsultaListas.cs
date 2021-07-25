@@ -25,26 +25,7 @@ namespace Logica.Listas
             AltaBajaConsultaListas.indumentariaDisponible = new List<Indumentaria>();
         }
 
-        /// <summary>
-        ///  Devuelve la informacion de la tanda en formato string, la fecha de produccion, el encargado y cada indumentaria que se mando a fabricar
-        /// </summary>
-        /// <typeparam name="T">El tipo de indumentaria que se quiera si se pasa indumentaria trae todos</typeparam>
-        /// <returns></returns>
-        public static string InfoTandaProduccion<T>(string fechaManufactura, string nombreEncargado) where T : Indumentaria
-        {
-            StringBuilder sb = new StringBuilder();
-            sb.AppendLine("Fecha de produccion: " + fechaManufactura);
-            foreach (Indumentaria ropita in AltaBajaConsultaListas.ListaIndumentariaProduccion<T>())
-            {
-                sb.AppendLine(ropita.ToString());
-            }
-            sb.AppendLine("---------------------");
-            sb.AppendLine("Encargado de la produccion: " + nombreEncargado);
-            return sb.ToString();
-        }
-
-
-        #region Consulta/Manipulacion de listas
+        #region Agregar elementos a las listas
 
         /// <summary>
         /// Agrega a lista de produccion objeto indumentaria pasada por segundo parametro como "new IndumentariaEventArgs(indumentariaAgregar)", agrega +1 a la cantidadManufacturada del mismo objeto
@@ -64,7 +45,6 @@ namespace Logica.Listas
                 {
                     AltaBajaConsultaListas.indumentariaProduccion.Add(indumentariaFabricar);
                     indumentariaFabricar.CantidadManufacturada++ ;
-                    //indumentariaFabricar.CantidadManufacturada = (int)source + 1 ;
                 }
             }
             else
@@ -72,7 +52,6 @@ namespace Logica.Listas
                 throw new IndumentariasExceptionsErrorAlFabricar("Error al castear source de evento a indumentaria para ser agregada en listbox de producido", null);
             }
         }
-
 
         /// <summary>
         /// Agrega indumentaria a lista de disponible, el primer parametro es indistinto lo que se le paso, ya que la validacion se hace acá con IndumentariaYaDisponible(indumentariaAgregar), el segundo debe pasarse como tipo IndumentariaEventArgs usando su constructor con primer arguimente la indumentaria a pasar/agregar
@@ -93,6 +72,9 @@ namespace Logica.Listas
             }
         }
 
+        #endregion
+
+        #region Consula a las listas
         /// <summary>
         /// Aqui se aplican generics: Devuelve una lista con la indumentaria manufacturada del tipo parametro
         /// </summary>
@@ -131,23 +113,25 @@ namespace Logica.Listas
             }
         }
 
+        #endregion
 
+        #region Borrado de la lista 
         /// <summary>
-        /// Borra la tanda de produccion de la fabrica
+        /// Borra la lista tanda de produccion de la fabrica
         /// </summary>
         public static void borrarTandaProduccion()
         {
             AltaBajaConsultaListas.indumentariaProduccion.Clear();
         }
-
         #endregion
 
         #region Validaciones
+
         /// <summary>
-        /// Devuelve la cantidad de manufacturados en la base de datos
+        /// Devuelve la cantidad de la indumentaria pasada por parametro que esta manufacturada en la base de datos
         /// </summary>
         /// <param name="indumentariaManufacturar">Indumentaria que quiera saber su cantidad de manufacturas en base de datos</param>
-        /// <returns></returns>
+        /// <returns>Cantidad de indumentaria fabricada</returns>
         public static int IndumentariaEnBDProduccion(Indumentaria indumentariaManufacturar)
         {
             if (indumentariaManufacturar is null)
@@ -156,13 +140,15 @@ namespace Logica.Listas
             }
             Dictionary<string, int> manufacturadosBD = new Dictionary<string, int>();
 
+            //Leo mi base de datos, para obtener el modelo y la cantidad fabricada
             LeerGuardarBaseDatos.LeerBaseDatosManufacturados(out manufacturadosBD);
 
-            
+            //itero la lista para ver si mi indumentaria pasada por parametro esta en mi base de datos
             foreach (KeyValuePair<string,int> ropa in manufacturadosBD)
             {
                 if ( ropa.Key == indumentariaManufacturar.Modelo)
                 {
+                    //si mi indumentaria esta en la base de datos, devuelvo la cantidad de fabricados que tiene
                     return ropa.Value;
                 }
             }
@@ -171,7 +157,7 @@ namespace Logica.Listas
         }
 
         /// <summary>
-        /// Compara los elementos de Fabrica.indumentariaDisponible (cargados con la base de datos al iniciar) con la indumentaria pasada por parametro
+        /// Compara los elementos de mla lista  Fabrica.indumentariaDisponible (cargados con la base de datos al iniciar) con la indumentaria pasada por parametro
         /// </summary>
         /// <param name="indumentariaAgregar">La indumentaria que quiere saber si esta en la lista </param>
         /// <returns>true si la indumentaria ya se encuentra en la lista de disponibles, false si no se encuentra</returns>
@@ -192,6 +178,7 @@ namespace Logica.Listas
 
             return false;
         }
+
         #endregion
 
     }

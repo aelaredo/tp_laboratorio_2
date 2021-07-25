@@ -8,6 +8,7 @@ using IndumentariasExceptiones;
 using Logica.Listas;
 using Logica.BaseDeDatos;
 using Logica.Interfaces;
+using Logica.MetodoExtension;
 
 
 namespace Logica.Objetos
@@ -36,6 +37,10 @@ namespace Logica.Objetos
             FabricandoIndumentaria += LeerGuardarBaseDatos.GuardarFabricadoEnDB;
         }
 
+        /// <summary>
+        /// Para el caso de las pruebas el codigo debe ser "prueba" y no uno generado por Guid
+        /// </summary>
+        /// <param name="codigoUnico">string que se le quiere dar al codigoUnico "prueba" cuando se agregue una indumentaria desde los Tests</param>
         protected Indumentaria(string codigoUnico)
         {
             this.codigoUnico = codigoUnico;
@@ -44,6 +49,10 @@ namespace Logica.Objetos
         }
 
         #region Metodos y propiedades IFabricable
+
+        /// <summary>
+        /// Devuelve la cantidad manufacturada de la indumentaria
+        /// </summary>
         public int CantidadManufacturada
         {
             get { return this.cantidadManufacturada; }
@@ -60,7 +69,9 @@ namespace Logica.Objetos
                 }
             }
         }
-
+        /// <summary>
+        /// Devuelve el Costo de Proiduccion de la indumentaria
+        /// </summary>
         public virtual float CostoProduccion
         {
             set
@@ -81,7 +92,7 @@ namespace Logica.Objetos
         }
 
         /// <summary>
-        /// Llama a evento FabricandoIndumentaria, actualmente suscrito a Fabrica.AgregarListBoxProduccion y Fabrica.GuardarFabricadoEnDB, llama a Fabrica.IndumentariaYaEnProduccion(this) para primer parametro de this.FabricandoIndumentaria
+        /// Llama a evento FabricandoIndumentaria, actualmente suscrito a AltaBajaConsultaListas.AgregarIndumentariaProduccion y LeerGuardarBaseDatos.GuardarFabricadoEnDB
         /// </summary>                                                    
         public void Fabricar()
         {

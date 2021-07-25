@@ -20,32 +20,24 @@ namespace FrmPrincipal
     public delegate void DelegadoActualizarForm();
     public partial class FrmCrearIndumentaria : Form
     {
-
-        //List<Indumentaria> indumentariasDisponibles;
-        //public event Comunicarse avisarCreacion;
         public event EventHandler<IndumentariaEventArgs> FabricandoIndumentaria;
         public event DelegadoIndumentaria AvisarCreacion;
-        //public event DelegadoVacio eventoSinParams;
         public ListBox listadoDisponibles;
-        int progreso;
+        private int progreso;
+
         public FrmCrearIndumentaria(ListBox listaDisponibles)
         {
             InitializeComponent();
             this.progreso = 0;
             this.listadoDisponibles = listaDisponibles;
-            //avisarCreacion = btnNuevaIndumentaria_Click;
-            //avisarCreacion += FrmPrincipal.comunicarseConForm;
-            //FrmPrincipal.comunicarseConForm += avisarCreacion;
             FabricandoIndumentaria += AltaBajaConsultaListas.AgregarIndumentariaDisponible;
             FabricandoIndumentaria += LeerGuardarBaseDatos.GuardarDisponibleEnDB;
-            //FabricandoIndumentaria += FrmPrincipal.ActualizarListBoxDisponible;
             AvisarCreacion += MostrarMensajeCreacion;
-            //ActualizarListBox += FrmPrincipal.ActualizarListBoxDisponible;
         }
 
         public void MostrarMensajeCreacion (Indumentaria zapatillaNueva)
         {
-            MessageBox.Show($"La indumentaria {zapatillaNueva.ToString()} se ha fabricado con exito");
+            MessageBox.Show($"La indumentaria {zapatillaNueva.ToString()} se ha diseñado con exito");
 
         }
 
@@ -93,32 +85,36 @@ namespace FrmPrincipal
         {
             if (this.pbCreacion.InvokeRequired)
             {
+                //si el flujo de aplicacion entra aqui desde un thread secundario debemos invocarlo nuevamente desde el thread primario apra que modifique el form
                 DelegadoActualizarForm actualizarBarra = new DelegadoActualizarForm(ActualizarBarraProgreso);
                 this.Invoke(actualizarBarra);
             }
             else
             {
+                //actualizo la barar de progreso de mi form
                 this.pbCreacion.Value = this.progreso;
                 if(this.pbCreacion.Value == 100)
                 {
+                        //Una vez llena la barra de progreso, reseteamos el contador y limpiamos la barra
                         this.progreso = 0;
                         this.pbCreacion.Value = this.progreso;
                 }
                 else
                 {
+                    //avanzamos +1 el progreso
                     this.progreso++;
                 }
             }
-            
         }
-
         private void AvanzarBarra(Indumentaria zapatillaNueva)
         {
             for (int i = 0; i < 101; i++)
             {
+                //cada 50 ms actualizo mi bara de progreso uno mas
                 this.ActualizarBarraProgreso();
                 Thread.Sleep(50);
             }
+            // una vez que llenamos la barra de progreso avisamos que ya se creó la indumentaria que pasamos por parametro
             this.AvisarCreacion.Invoke(zapatillaNueva);
         }
 

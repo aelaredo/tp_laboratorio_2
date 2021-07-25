@@ -31,6 +31,13 @@ namespace Logica.Objetos
             this.costoProduccion = (this.PorcentajeAlgodon + 100) * 10;
         }
 
+        /// <summary>
+        /// Para el caso de las pruebas el codigo debe ser "prueba" y no uno generado por Guid
+        /// </summary>
+        /// <param name="porcentajeAlgodon"></param>
+        /// <param name="estampado"></param>
+        /// <param name="modelo"></param>
+        /// <param name="codigoPrueba"></param>
         public Camiseta(float porcentajeAlgodon, bool estampado, string modelo, string codigoPrueba) : this(porcentajeAlgodon, estampado, modelo)
         {
             this.CodigoUnico = codigoPrueba;

@@ -18,6 +18,7 @@ namespace Logica.Objetos
 
         public Indumentaria IndumentariaObject
         {
+            //De esta forma podemos almacenar y devolver un objeto mediante EvntArgs
             get { return indumentariaPasar; }
         }
     }

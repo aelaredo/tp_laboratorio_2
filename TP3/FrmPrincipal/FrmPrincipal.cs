@@ -26,7 +26,7 @@ namespace FrmPrincipal
     public partial class FrmPrincipal : Form
     {
         Thread hiloFabricarIndu;
-        public static event Fabricar esperarFabricar;
+        public static event Fabricar EsperarFabricar;
         
         public FrmPrincipal()
         {
@@ -328,7 +328,7 @@ namespace FrmPrincipal
 
             if (this.lstBoxInduDisponible.Items.Count == 0)
             {
-                this.limpiarCasillerosInduDisponible();
+                this.LimpiarCasillerosInduDisponible();
             }
         }
         //public delegate void ParameterizedThreadStart(object objeto, ListBoxEventArgs eventArgs);
@@ -465,7 +465,7 @@ namespace FrmPrincipal
         /// <summary>
         /// Limpia las casillas con el detalles de la indumentaria disponible seleccionada
         /// </summary>
-        private void limpiarCasillerosInduDisponible()
+        private void LimpiarCasillerosInduDisponible()
         {
             this.txtTipoDisp.Text = "";
             this.txtCodigoDisp.Text = "";

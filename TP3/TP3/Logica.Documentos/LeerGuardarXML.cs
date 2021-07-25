@@ -18,9 +18,9 @@ namespace Logica.Documentos
     public class LeerGuardarXML
     {
         /// <summary>
-        /// 
+        /// Lee un archivo XML desde el patch pasado popr parametro y lo pasa a una lista del tipo parametro
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="T">Tipo ede lista que se quiere leer y que se pasara al ser leido</typeparam>
         /// <param name="pathArchivo">Path completo incluido nombre archivo y .xml</param>
         /// <param name="datos">Lista a la que se le cargara, no es necesario que este instanciada</param>
         public static void LeerDocumento<T>(string pathArchivo, out List<T> datos)
@@ -31,7 +31,6 @@ namespace Logica.Documentos
             {
                 if (pathArchivo != null && File.Exists(pathArchivo))
                 {
-
                     using (XmlTextReader auxReader = new XmlTextReader(pathArchivo))
                     {
                         XmlSerializer nuevoXml = new XmlSerializer(typeof(List<T>));
@@ -41,7 +40,6 @@ namespace Logica.Documentos
             }
             catch (Exception)
             {
-                datos = new List<T>();
                 throw new Exception("No se pudo leer el archivo: " + pathArchivo);
             }
         }

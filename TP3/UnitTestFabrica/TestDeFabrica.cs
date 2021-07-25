@@ -174,6 +174,8 @@ namespace UnitTestFabrica
             //Instancio una lista nueva para que la lectura de base de datos se haga aquí
             List<Indumentaria> listaPrueba = new List<Indumentaria>();
             LeerGuardarBaseDatos.LeerBaseDatosDisponibles(out listaPrueba);
+
+            //Aca testeo que esten agregadas mis dos indumentarias que previamente guarde
             Assert.IsTrue(listaPrueba.Count == 2);
 
             ///Borramos los datos que utilizamos para el assert anterior

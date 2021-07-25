@@ -7,6 +7,10 @@ using Logica.Objetos;
 
 namespace Logica.Interfaces
 {
+    /// <summary>
+    /// Define el funcionamiento de un objeto fabricable
+    /// </summary>
+    /// <typeparam name="T">Tipo parametro para ser utilizado en otras funcionalidades</typeparam>
     public interface IFabricable<T> where T : Indumentaria
     {
         /// <summary>
