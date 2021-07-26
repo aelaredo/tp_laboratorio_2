@@ -1,0 +1,14 @@
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.exe.config
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.exe
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\bin\Debug\FrmPrincipal.pdb
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\bin\Debug\TP3.dll
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\bin\Debug\TP3.pdb
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.csprojAssemblyReference.cache
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.FrmPrincipal.resources
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.Properties.Resources.resources
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.csproj.GenerateResource.cache
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.csproj.CoreCompileInputs.cache
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.csproj.CopyComplete
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.exe
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.pdb
+C:\Users\Agust\Documents\Proyectos C#\TP3\FrmPrincipal\obj\Debug\FrmPrincipal.FrmCrearIndumentaria.resources
